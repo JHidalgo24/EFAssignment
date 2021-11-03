@@ -51,6 +51,7 @@ namespace Day10Class
                     break;
                 case 3:
                     //Read Posts
+                    try{
                     using(var db = new BlogContext()){
 
                         System.Console.WriteLine("Here is the list of blogs");
@@ -66,6 +67,10 @@ namespace Day10Class
                             System.Console.WriteLine($"Post #{x.PostId}\nBlogID:{x.BlogId}\nContent:{x.Content}\n");
                         }
                     }
+                    }
+                    catch(Exception){
+                        System.Console.WriteLine("Could not read posts");
+                    }
                     break;
                 case 4:
                     //Make Post
@@ -73,15 +78,20 @@ namespace Day10Class
                     var postTitle = Console.ReadLine();
                     var post = new Post();
                     post.Title = postTitle;
-                    
                     using(var db = new BlogContext()){
                         foreach(var b in db.Blogs){
                             System.Console.WriteLine($"Blog #{b.BlogId}: {b.Name}");
                         }
                     }
                     System.Console.WriteLine("What blog do you want to add the Post to?");
+                    try{
                     int pickedPostBlog = Int32.Parse(Console.ReadLine());
-                    post.BlogId = pickedPostBlog;
+                        post.BlogId = pickedPostBlog;
+                    }
+                    catch(Exception){
+                        System.Console.WriteLine("Sorry that is not a choice");
+                    }
+                    
                     System.Console.WriteLine("What is in the post?(content)");
                     string content = Console.ReadLine();
                     post.Content = content;
@@ -96,73 +106,17 @@ namespace Day10Class
                             System.Console.WriteLine("Sorry could not add your post to the Database");
                         }
                     }
-                    break;
-                    
+                    break;  
                     
                 }
                 System.Console.WriteLine("Do you want to\n1.)Display Blogs \n2.)Add Blog\n3.)Display Posts\n4.)Add Post\n5.)Exit");
+                try{
                 option = Int32.Parse(Console.ReadLine());
+                }
+                catch(Exception){
+                    System.Console.WriteLine("Sorry that is not an option");
+                }
             }
-
-
-
-
-
-
-
-            // using(var db = new BlogContext()){
-            //     var blog = db.Blogs.Where(x => x.BlogId == 1).FirstOrDefault();
-            //     System.Console.WriteLine($"Posts for blog {blog.Name}");
-
-                
-            //     foreach(var post in blog.Post){
-            //         System.Console.WriteLine(post);
-            //     }
-
-
-
-            // }
-            
-            // //add post to database
-            // // System.Console.WriteLine("Enter your post name");
-            // // var postTitle = Console.ReadLine();
-
-            // // var post = new Post();
-            // // post.Title = postTitle;
-            // // post.BlogId = 1;
-
-            // // using(var db = new BlogContext())
-            // // {
-            // //     db.Posts.Add(post);
-            // //     db.SaveChanges();
-            // // }
-
-            // //read blogs from database
-            // // using(var db = new BlogContext()){
-            // //     System.Console.WriteLine("Here is the list of blogs");
-            // //     foreach(var b in db.Blogs){
-            // //         System.Console.WriteLine($"Blog: {b.BlogId}: {b.Name}");
-            // //     }
-            // // }
-
-
-
-            // //Add blog to Database
-            // // Console.WriteLine("Enter your Blog name");
-            // // var blogName = Console.ReadLine();
-
-            // // //Create new Blog
-            // // var blog = new Blog();
-            // // blog.Name = blogName;
-
-            // // //Save blog object to database
-            // // using (var db = new BlogContext())
-            // // {
-            // // db.Add(blog);
-            // // db.SaveChanges();
-            
-            // // db.Dispose();
-            // // }
         }
     }
 }
