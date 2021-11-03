@@ -40,8 +40,13 @@ namespace Day10Class
                     //Save blog object to database
                     using (var db = new BlogContext())
                     {
+                        try{
                         db.Add(blog);
                         db.SaveChanges();
+                        }
+                        catch(Exception){
+                            System.Console.WriteLine("Sorry could not add your post to the Database");
+                        }
                     }
                     break;
                 case 3:
@@ -83,8 +88,13 @@ namespace Day10Class
                     //add post
                     using(var db = new BlogContext())
                     {
+                        try{
                         db.Add(post);
                         db.SaveChanges();
+                        }
+                        catch(Exception){
+                            System.Console.WriteLine("Sorry could not add your post to the Database");
+                        }
                     }
                     break;
                     
