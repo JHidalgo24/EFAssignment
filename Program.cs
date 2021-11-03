@@ -64,7 +64,7 @@ namespace Day10Class
                         var posts = db.Posts.Where(c => c.BlogId == pickedBlog);
                         System.Console.WriteLine($"Showing blog{pickedBlog}");
                         foreach(var x in posts){
-                            System.Console.WriteLine($"Post #{x.PostId}\nBlogID:{x.BlogId}\nContent:{x.Content}\n");
+                            System.Console.WriteLine($"Post #{x.PostId}\nTitle:{x.Title}\nContent:{x.Content}\n");
                         }
                     }
                     }
